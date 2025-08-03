@@ -1,0 +1,115 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.input {
+  @apply w-full px-4 py-3 rounded-xl bg-white/5 border border-white/20 text-white placeholder-gray-400 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/25 focus:outline-none transition-all duration-300;
+}
+.button {
+  @apply px-6 py-3 rounded-xl bg-gradient-to-r from-green-400 to-yellow-500 text-white font-semibold shadow-lg hover:shadow-xl transition-shadow duration-300;
+}
+/* Custom animations */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(255, 224, 0, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(255, 224, 0, 0.6);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 1s ease-out forwards;
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(10, 25, 30, 0.2); /* Slight transparent of bg-blue */
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(45deg, #01f791, #ffe000); /* Green to Yellow */
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(45deg, #01db7e, #e6cb00);
+}
+
+/* Glassmorphism utilities */
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-strong {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Neon glow effects */
+.neon-yellow {
+  box-shadow: 0 0 20px rgba(255, 224, 0, 0.6);
+}
+
+.neon-green {
+  box-shadow: 0 0 20px rgba(1, 247, 145, 0.6);
+}
+
+.neon-duo {
+  box-shadow:
+    0 0 10px rgba(255, 224, 0, 0.4),
+    0 0 20px rgba(1, 247, 145, 0.4);
+}
+
+/* Form focus states */
+input:focus,
+textarea:focus,
+select:focus {
+  box-shadow:
+    0 0 0 3px rgba(255, 224, 0, 0.1),
+    0 0 20px rgba(255, 224, 0, 0.3);
+  outline: none;
+}
+
+/* Button hover effects */
+button:hover {
+  transform: translateY(-2px);
+  transition: all 0.2s ease-in-out;
+}
+
+/* Particle animation */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
