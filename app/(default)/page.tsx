@@ -1,6 +1,6 @@
 export const metadata = {
-  title: "Home - Open PRO",
-  description: "Page description",
+  title: "ICEFOSS 25'",
+  description: "",
 };
 
 import PageIllustration from "@/components/page-illustration";
@@ -17,7 +17,7 @@ export default function Home() {
       <Hero />
       <Workflows />
       <Features />
-      <Testimonials />
+      {/* <Testimonials /> */}
       <Cta />
     </>
   );
