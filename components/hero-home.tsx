@@ -10,47 +10,46 @@ export default function HeroHome() {
         <div className="py-12 md:py-0 ">
           {/* Section header */}
           <div className="pb-12 md:pb-10">
-
-          <RotatingDiscs />
+            <RotatingDiscs />
           </div>
           <div className="pb-0 text-center md:pb-20">
             <h1
-              className="animate-[gradient_6s_linear_infinite] bg-[linear-gradient(to_right,var(--color-gray-200),var(--color-indigo-200),var(--color-gray-50),var(--color-indigo-300),var(--color-gray-200))] bg-[length:200%_auto] bg-clip-text pb-5 font-nacelle text-4xl font-semibold text-transparent md:text-5xl"
+              className="animate-[gradient_6s_linear_infinite] bg-[linear-gradient(to_right,#FFE000,#01F791,#FFE000)] bg-[length:200%_auto] bg-clip-text pb-5 font-nacelle text-4xl font-extrabold text-transparent md:text-6xl"
               data-aos="fade-up"
             >
               ICEFOSS 2025
             </h1>
+
             <div className="mx-auto max-w-3xl">
               <p
-                className="mb-2 text-xl text-indigo-200/65"
+                className="mb-3 text-lg md:text-xl text-indigo-200/80 leading-relaxed"
                 data-aos="fade-up"
                 data-aos-delay={200}
-              >
-                International Conference on Emerging Trends in Free and Open
-                Source Software
+              >International Conference on Emerging Trends in Free and Open Source Software
               </p>
+
               <p
-                className="mb-8 text-xl text-indigo-200/65"
+                className="mb-10 text-lg md:text-xl font-semibold "
                 data-aos="fade-up"
-                data-aos-delay={200}
+                data-aos-delay={300}
               >
-                August 24-25
+                September 11 – 12, 2025
               </p>
 
               <div className="mx-auto max-w-xs sm:flex sm:max-w-none sm:justify-center">
                 <div data-aos="fade-up" data-aos-delay={400}>
-  <a
-    className="btn group mb-4 w-full md:px-12 bg-gradient-to-tr from-[#FFE000] to-[#01F791] text-lg text-black font-semibold shadow-md hover:opacity-90 transition sm:mb-0 sm:w-auto"
-    href="/"
-  >
-    <span className="relative inline-flex items-center">
-      Register Now
-      <span className="ml-1 tracking-normal text-black/70 transition-transform group-hover:translate-x-0.5">
-        -&gt;
-      </span>
-    </span>
-  </a>
-</div>
+                  <a
+                    className="btn group mb-4 w-full md:px-12 bg-gradient-to-tr from-[#FFE000] to-[#01F791] text-lg text-black font-semibold shadow-md hover:opacity-90 transition sm:mb-0 sm:w-auto"
+                    href="/"
+                  >
+                    <span className="relative inline-flex items-center">
+                      Register Now
+                      <span className="ml-1 tracking-normal text-black/70 transition-transform group-hover:translate-x-0.5">
+                        -&gt;
+                      </span>
+                    </span>
+                  </a>
+                </div>
 
                 {/* <div data-aos="fade-up" data-aos-delay={600}>
                   <a

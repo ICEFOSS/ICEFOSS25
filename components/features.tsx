@@ -8,7 +8,7 @@ const sectionData = {
   badge: "Hands-on Learning",
   title: "Workshops",
   description:
-    "Open AI reads and understands your files, and with nothing more than a single line of feedback, so you can go further than the speed of thought.",
+    "Learn by doing — build, code, and deploy real projects that sharpen your skills beyond theory.",
   image: FeaturesImage,
 };
 
@@ -93,7 +93,6 @@ const featuresData = [
   },
 ];
 
-
 export default function Features() {
   return (
     <section className="relative">
@@ -129,14 +128,15 @@ export default function Features() {
           <div className="mx-auto max-w-3xl pb-4 text-center md:pb-18">
             <div className="inline-flex items-center gap-3 pb-3 before:h-px before:w-8 before:bg-linear-to-r before:from-transparent before:to-indigo-200/50 after:h-px after:w-8 after:bg-linear-to-l after:from-transparent after:to-indigo-200/50">
               <span className="inline-flex bg-gradient-to-r from-[#FFE000] to-[#01F791] bg-clip-text text-transparent">
-  {sectionData.badge}
-</span>
-
+                {sectionData.badge}
+              </span>
             </div>
             <h2 className="animate-[gradient_6s_linear_infinite] bg-[linear-gradient(to_right,var(--color-gray-200),var(--color-indigo-200),var(--color-gray-50),var(--color-indigo-300),var(--color-gray-200))] bg-[length:200%_auto] bg-clip-text pb-4 font-nacelle text-3xl font-semibold text-transparent md:text-4xl">
               {sectionData.title}
             </h2>
-            <p className="text-lg text-indigo-200/65">{sectionData.description}</p>
+            <p className="text-lg text-indigo-200/65">
+              {sectionData.description}
+            </p>
           </div>
 
           {/* Section image */}
