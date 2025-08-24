@@ -7,7 +7,7 @@ import Spotlight from "@/components/spotlight";
 // Section Data
 const sectionData = {
   badge: "Hands-on Learning",
-  title: "Workshops",
+  title: "About ICEFOSS",
   description:
     "Master cutting-edge technologies with hands-on, practical learning experiences that empower you to build real-world solutions and grow your expertise.",
 };
@@ -44,29 +44,48 @@ const workflowData = [
   },
 ];
 
-
 export default function Workflows() {
   return (
     <section>
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <div className="pb-12 md:pb-20">
+        <div className="border-t py-12 [border-image:linear-gradient(to_right,transparent,--theme(--color-slate-400/.25),transparent)1] md:py-20">
           {/* Section header */}
-          <div className="mx-auto max-w-3xl pb-12 text-center md:pb-20">
-            <div className="inline-flex items-center gap-3 pb-3 before:h-px before:w-8 before:bg-linear-to-r before:from-transparent before:to-indigo-200/50 after:h-px after:w-8 after:bg-linear-to-l after:from-transparent after:to-indigo-200/50">
+          <div className="mx-auto max-w-3xl  text-center ">
+            {/* <div className="inline-flex items-center gap-3 pb-3 before:h-px before:w-8 before:bg-linear-to-r before:from-transparent before:to-indigo-200/50 after:h-px after:w-8 after:bg-linear-to-l after:from-transparent after:to-indigo-200/50">
               <span className="inline-flex bg-linear-to-r from-green-500 to-green-200 bg-clip-text text-transparent">
                 {sectionData.badge}
               </span>
-            </div>
-            <h2 className="animate-[gradient_6s_linear_infinite] bg-[linear-gradient(to_right,var(--color-gray-200),var(--color-indigo-200),var(--color-gray-50),var(--color-indigo-300),var(--color-gray-200))] bg-[length:200%_auto] bg-clip-text pb-4 font-nacelle text-3xl font-semibold text-transparent md:text-4xl">
-              {sectionData.title}
+            </div> */}
+            <h2 className="pb-4 font-nacelle text-3xl font-semibold md:text-4xl">
+              About{" "}
+              <span className="bg-gradient-to-r from-[#FFE000] to-[#01F791] bg-clip-text text-transparent">
+                ICEFOSS 2025
+              </span>
             </h2>
-            <p className="text-lg text-indigo-200/65">
+
+            {/* <p className="text-lg text-indigo-200/65">
               {sectionData.description}
+            </p> */}
+            <p className="max-w-3xl text-lg leading-relaxed text-indigo-200/65 md:text-lg">
+              Since its inception in 2010, ICEFOSS has proudly stood as the
+              flagship event of the
+              <span className="font-semibold">
+                {" "}
+                Computer Science and Engineering Department, FISAT
+              </span>
+              , serving as a beacon of innovation, collaboration, and
+              technological excellence.
+              <span className="font-semibold"> ICEFOSS 2025</span> is a platform
+              that upholds the motto –
+              <span className="italic">
+                {" "}
+                Catalyze Innovation. Code. Collaborate. Create.
+              </span>
             </p>
           </div>
 
           {/* Spotlight items */}
-          <Spotlight className="group mx-auto grid max-w-sm items-start gap-6 lg:max-w-none lg:grid-cols-3">
+          {/* <Spotlight className="group mx-auto grid max-w-sm items-start gap-6 lg:max-w-none lg:grid-cols-3">
             {workflowData.map((item) => (
               <a
                 key={item.id}
@@ -84,7 +103,6 @@ export default function Workflows() {
                 <div className="relative z-20 h-full overflow-hidden rounded-[inherit] bg-gray-950 
                                 after:absolute after:inset-0 after:bg-linear-to-br 
                                 after:from-gray-900/50 after:via-gray-800/25 after:to-gray-900/50">
-                  {/* Arrow */}
                   <div
                     className="absolute right-6 top-6 flex h-8 w-8 items-center justify-center rounded-full 
                                border border-gray-700/50 bg-gray-800/65 text-gray-200 
@@ -99,7 +117,6 @@ export default function Workflows() {
                     </svg>
                   </div>
 
-                  {/* Image */}
                   <Image
                     className="inline-flex"
                     src={item.image}
@@ -108,7 +125,6 @@ export default function Workflows() {
                     alt={item.alt}
                   />
 
-                  {/* Content */}
                   <div className="p-6">
                     <div className="mb-3">
                       <span className="btn-sm relative rounded-full bg-gray-800/40 px-2.5 py-0.5 text-xs font-normal 
@@ -128,7 +144,7 @@ export default function Workflows() {
                 </div>
               </a>
             ))}
-          </Spotlight>
+          </Spotlight> */}
         </div>
       </div>
     </section>

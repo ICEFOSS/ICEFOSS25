@@ -21,7 +21,7 @@ const featuresData = [
       "Build fast, interactive UIs with React and learn component-driven development from scratch to advanced patterns.",
     icon: (
       <svg
-        className="mb-3 fill-indigo-500"
+        className="mb-3 fill-[#01f791]"
         xmlns="http://www.w3.org/2000/svg"
         width={24}
         height={24}
@@ -41,7 +41,7 @@ const featuresData = [
       "Learn how to build scalable server-side applications with Node.js, Express, and REST API best practices.",
     icon: (
       <svg
-        className="mb-3 fill-indigo-500"
+        className="mb-3 fill-[#01f791]"
         xmlns="http://www.w3.org/2000/svg"
         width={24}
         height={24}
@@ -58,7 +58,7 @@ const featuresData = [
       "Understand NoSQL databases, schema design, queries, and how to integrate MongoDB with backend services.",
     icon: (
       <svg
-        className="mb-3 fill-indigo-500"
+        className="mb-3 fill-[#01f791]"
         xmlns="http://www.w3.org/2000/svg"
         width={24}
         height={24}
@@ -78,7 +78,7 @@ const featuresData = [
       "Deploy complete full stack applications with CI/CD pipelines, Docker, and cloud platforms like Vercel & AWS.",
     icon: (
       <svg
-        className="mb-3 fill-blue-500"
+        className="mb-3 fill-[#01f791]"
         xmlns="http://www.w3.org/2000/svg"
         width={24}
         height={24}
@@ -128,9 +128,10 @@ export default function Features() {
           {/* Section header */}
           <div className="mx-auto max-w-3xl pb-4 text-center md:pb-18">
             <div className="inline-flex items-center gap-3 pb-3 before:h-px before:w-8 before:bg-linear-to-r before:from-transparent before:to-indigo-200/50 after:h-px after:w-8 after:bg-linear-to-l after:from-transparent after:to-indigo-200/50">
-              <span className="inline-flex bg-linear-to-r from-indigo-500 to-indigo-200 bg-clip-text text-transparent">
-                {sectionData.badge}
-              </span>
+              <span className="inline-flex bg-gradient-to-r from-[#FFE000] to-[#01F791] bg-clip-text text-transparent">
+  {sectionData.badge}
+</span>
+
             </div>
             <h2 className="animate-[gradient_6s_linear_infinite] bg-[linear-gradient(to_right,var(--color-gray-200),var(--color-indigo-200),var(--color-gray-50),var(--color-indigo-300),var(--color-gray-200))] bg-[length:200%_auto] bg-clip-text pb-4 font-nacelle text-3xl font-semibold text-transparent md:text-4xl">
               {sectionData.title}

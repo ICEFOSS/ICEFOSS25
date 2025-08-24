@@ -63,8 +63,8 @@ export default function Header() {
             </li> */}
             <li>
               <Link
-                href="/signup"
-                className="btn-sm bg-linear-to-tr  from-green-600 to-green-500 bg-[length:100%_100%] bg-[bottom] py-[5px] text-white shadow-[inset_0px_1px_0px_0px_--theme(--color-white/.16)] hover:bg-[length:100%_150%]"
+                href="/"
+                className="btn-sm bg-linear-to-tr  from-[#FFE000] to-[#01F791]  text-black font-semibold bg-[length:100%_100%] bg-[bottom] py-[5px]  shadow-[inset_0px_1px_0px_0px_--theme(--color-white/.16)] hover:bg-[length:100%_150%]"
               >
                 Register
               </Link>
