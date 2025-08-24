@@ -93,7 +93,7 @@ const featuresData = [
   },
 ];
 
-export default function Features() {
+export default function Workshop() {
   return (
     <section className="relative">
       {/* Background shapes */}
