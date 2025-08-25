@@ -6,9 +6,7 @@ export default function ContactUs() {
           {/* Section header */}
           <div className="mx-auto max-w-3xl text-center">
             <h2 className="pb-4 font-nacelle text-3xl font-semibold md:text-4xl">
-              <span className="">
-                Contact Us
-              </span>
+              <span className="">Contact Us</span>
             </h2>
             <p className="text-lg text-indigo-200/65">
               Reach out to us for any queries or details about ICEFOSS 2025.
@@ -30,7 +28,8 @@ export default function ContactUs() {
             </div>
             <div>
               <h3 className="font-semibold text-gray-200">Phone</h3>
-              <p>+91 99999 99999</p>
+              <p>+91 9400902319</p>
+              <p>Rhithika</p>
             </div>
             <div>
               <h3 className="font-semibold text-gray-200">Location</h3>

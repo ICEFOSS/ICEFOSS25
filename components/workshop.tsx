@@ -2,6 +2,7 @@ import Image from "next/image";
 import BlurredShapeGray from "@/public/images/blurred-shape-gray.svg";
 import BlurredShape from "@/public/images/blurred-shape.svg";
 import FeaturesImage from "@/public/images/features.png";
+import { Calendar, BadgeIndianRupee } from "lucide-react";
 
 // Section Data
 const sectionData = {
@@ -16,80 +17,83 @@ const sectionData = {
 const featuresData = [
   {
     id: 1,
-    title: "React Mastery",
+    title: "Kickstart Your Journey in Data Science & ML",
     description:
-      "Build fast, interactive UIs with React and learn component-driven development from scratch to advanced patterns.",
+      "Understand the Basics – Learn what Data Science and ML are, why they matter, and how they’re applied in real life. Discover the career paths, skills, and opportunities available in the field.",
     icon: (
       <svg
         className="mb-3 fill-[#01f791]"
         xmlns="http://www.w3.org/2000/svg"
         width={24}
         height={24}
+        viewBox="0 0 24 24"
       >
-        <path d="M0 0h14v17H0V0Zm2 2v13h10V2H2Z" />
-        <path
-          fillOpacity=".48"
-          d="m16.295 5.393 7.528 2.034-4.436 16.412L5.87 20.185l.522-1.93 11.585 3.132 3.392-12.55-5.597-1.514.522-1.93Z"
-        />
+        <path d="M3 3h2v18H3V3Zm8 6h2v12h-2V9Zm8-4h2v16h-2V5Z" />
       </svg>
     ),
+    date: " 11/9/2025",
+    price: 250,
   },
   {
     id: 2,
-    title: "Node.js Backend",
+    title:
+      "Mastering GenAI & Retrieval Augmented Generation (RAG): From Fundamentals to Real-World Applications",
     description:
-      "Learn how to build scalable server-side applications with Node.js, Express, and REST API best practices.",
+      "Dive into the world of Generative AI and Retrieval Augmented Generation (RAG). Learn how GenAI models like LLMs work, and how RAG enhances them with external knowledge for more accurate, context-aware applications. Explore practical implementations in chatbots, knowledge assistants, and enterprise search solutions",
     icon: (
       <svg
         className="mb-3 fill-[#01f791]"
         xmlns="http://www.w3.org/2000/svg"
         width={24}
         height={24}
+        viewBox="0 0 24 24"
       >
-        <path fillOpacity=".48" d="M7 8V0H5v8h2Zm12 16v-4h-2v4h2Z" />
-        <path d="M19 6H0v2h17v8H7v-6H5v8h19v-2h-5V6Z" />
+        <path d="M9 2a7 7 0 0 0-7 7v2a7 7 0 0 0 7 7h1v-2H9a5 5 0 0 1-5-5V9a5 5 0 0 1 5-5h1V2H9Zm5 0v2h1a5 5 0 0 1 5 5v2a5 5 0 0 1-5 5h-1v2h1a7 7 0 0 0 7-7V9a7 7 0 0 0-7-7h-1Z" />
+        <circle cx="9" cy="12" r="1.5" />
+        <circle cx="15" cy="12" r="1.5" />
+        <path d="M12 17c1.5 0 3-1.5 3-3h-6c0 1.5 1.5 3 3 3Z" />
       </svg>
     ),
+    date: "11/9/2025-12/9/2025 (Two day)",
+    price: 500,
   },
   {
     id: 3,
-    title: "MongoDB & Databases",
+    title: "Hugging face",
     description:
-      "Understand NoSQL databases, schema design, queries, and how to integrate MongoDB with backend services.",
+      "Discover the power of Natural Language Processing with Hugging Face. Learn how to build and fine-tune state-of-the-art transformer models for text classification, sentiment analysis, chatbots, and more using the Transformers library.",
     icon: (
       <svg
         className="mb-3 fill-[#01f791]"
         xmlns="http://www.w3.org/2000/svg"
         width={24}
         height={24}
+        viewBox="0 0 24 24"
       >
-        <path d="M23.414 6 18 .586 16.586 2l3 3H7a6 6 0 0 0-6 6h2a4 4 0 0 1 4-4h12.586l-3 3L18 11.414 23.414 6Z" />
-        <path
-          fillOpacity=".48"
-          d="M13.01 12.508a2.5 2.5 0 0 0-3.502.482L1.797 23.16.203 21.952l7.71-10.17a4.5 4.5 0 1 1 7.172 5.437l-4.84 6.386-1.594-1.209 4.841-6.385a2.5 2.5 0 0 0-.482-3.503Z"
-        />
+        <path d="M4 4h16v10H5.17L4 15.17V4Zm2 2v6h12V6H6Zm0 12h12v2H6v-2Z" />
       </svg>
     ),
+    date: "11/9/2025",
+    price: 250,
   },
   {
     id: 4,
-    title: "Full Stack Deployment",
+    title: "WEBCRAFT- MERNSTACK",
     description:
-      "Deploy complete full stack applications with CI/CD pipelines, Docker, and cloud platforms like Vercel & AWS.",
+      "Master modern web development with MongoDB, Express.js, React, and Node.js. Learn to build dynamic, scalable full-stack applications from backend to frontend with real-world deployment practices.",
     icon: (
       <svg
         className="mb-3 fill-[#01f791]"
         xmlns="http://www.w3.org/2000/svg"
         width={24}
         height={24}
+        viewBox="0 0 24 24"
       >
-        <path
-          fillOpacity=".48"
-          d="M19 8h5v2h-5V8Zm-4 5h9v2h-9v-2Zm9 5H11v2h13v-2Z"
-        />
-        <path d="M19.406 3.844 6.083 20.497.586 15 2 13.586l3.917 3.917L17.844 2.595l1.562 1.25Z" />
+        <path d="M8.293 6.293 2.586 12l5.707 5.707L9.707 16.293 5.414 12l4.293-4.293-1.414-1.414ZM15.707 6.293 14.293 7.707 18.586 12l-4.293 4.293 1.414 1.414L21.414 12l-5.707-5.707Z" />
       </svg>
     ),
+    date: "12/9/2025",
+    price: 250,
   },
 ];
 
@@ -159,6 +163,26 @@ export default function Workshop() {
                   {feature.title}
                 </h3>
                 <p className="text-indigo-200/65">{feature.description}</p>
+                {/* <p className="mt-3 flex items-center gap-2 text-sm text-indigo-200/70">
+                  <Calendar className="h-4 w-4 text-indigo-400 drop-shadow-[0_0_6px_rgba(99,102,241,0.8)]" />
+                  <span className="font-medium">{feature.date}</span>
+                </p>
+               */}
+                <p className="mt-3 flex items-center gap-6 text-sm text-indigo-200/70">
+                  {/* Date */}
+                  <span className="flex items-center gap-2">
+                    <Calendar className="h-4 w-4 text-indigo-400 drop-shadow-[0_0_6px_rgba(99,102,241,0.8)]" />
+                    <span className="font-medium">
+                      {feature.date || "Coming Soon"}
+                    </span>
+                  </span>
+
+                  {/* Price */}
+                  <span className="flex items-center gap-2 text-emerald-300/80">
+                    <BadgeIndianRupee className="h-4 w-4 text-emerald-400 drop-shadow-[0_0_6px_rgba(16,185,129,0.9)]" />
+                    <span className="font-semibold">{feature.price}</span>
+                  </span>
+                </p>
               </article>
             ))}
           </div>
