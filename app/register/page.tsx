@@ -101,16 +101,78 @@ export default function WorkshopForm() {
 
     return true;
   };
+  //cloudinary fucntion for uploading screenshots
+  async function uploadToCloudinary(file: File) {
+    const fd = new FormData();
+    fd.append("file", file);
+    fd.append("upload_preset", "registration"); // from Cloudinary
+    fd.append("folder", "icefoss");
+
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/dmlzfwdk2/image/upload",
+      {
+        method: "POST",
+        body: fd,
+      }
+    );
+
+    if (!res.ok) throw new Error("Upload failed");
+
+    const data = await res.json();
+    return { url: data.secure_url, publicId: data.public_id };
+  }
 
   const sendPaymentData = async () => {
     const paymentData = new FormData();
-    Object.entries(formData).forEach(([key, value]) => {
+    try {
+      let screenshotUrl = "";
+      let publicId = "";
+
+      //Upload to Cloudinary
+      if (formData.paymentScreenshot instanceof File) {
+        const result = await uploadToCloudinary(formData.paymentScreenshot);
+        screenshotUrl = result.url;
+        publicId = result.publicId;
+      }
+
+      const paymentData = new URLSearchParams();
+      Object.entries(formData).forEach(([key, value]) => {
+        if (key === "paymentScreenshot") {
+          if (screenshotUrl) paymentData.append("screenshotUrl", screenshotUrl);
+          if (publicId) paymentData.append("publicId", publicId);
+        } else {
+          paymentData.append(key, String(value));
+        }
+      });
+      // Google Apps Script
+      const response = await fetch(
+        "https://script.google.com/macros/s/AKfycbzbpQUJbt6KCkdnA1uJHYR0TEDnOh7sg4bZ51ZeshQXgWInIpgswS190HgPehJjN11Zig/exec",
+        {
+          method: "POST",
+          body: paymentData,
+        }
+      );
+
+      if (response.ok) {
+        console.log("Payment processed successfully:", await response.text());
+        return true;
+      } else {
+        console.error("Payment processing failed:", response.statusText);
+        return false;
+      }
+    } catch (error) {
+      console.error("API request error:", error);
+      return false;
+    }
+  };
+  /*Object.entries(formData).forEach(([key, value]) => {
       if (key === "paymentScreenshot" && value instanceof File) {
         paymentData.append("paymentScreenshot", value);
       } else if (key !== "paymentScreenshot") {
         paymentData.append(key, String(value));
       }
     });
+    
 
     try {
       const response = await fetch("http://localhost:4000/", {
@@ -132,6 +194,7 @@ export default function WorkshopForm() {
       return false;
     }
   };
+  */
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
