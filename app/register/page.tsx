@@ -62,6 +62,7 @@ export default function WorkshopForm() {
 
   const [showPayment, setShowPayment] = useState(false);
   const [paymentCompleted, setPaymentCompleted] = useState(false);
+  const [paymentProcessing, setPaymentProcessing] = useState(false);
 
   const handleWorkshopSelect = (workshop: (typeof workshopNames)[0]) => {
     setSelectedWorkshop(workshop);
@@ -162,6 +163,8 @@ export default function WorkshopForm() {
       }
     } catch (error) {
       console.error("API request error:", error);
+      setPaymentProcessing(false);
+
       return false;
     }
   };
@@ -226,16 +229,18 @@ export default function WorkshopForm() {
   };
 
   const handleCompletePayment = async () => {
+    setPaymentProcessing(true);
     if (!validateFormData()) {
+      setPaymentProcessing(false);
       return;
     }
 
     console.log("Sending payment data:", formData);
     const success = await sendPaymentData();
-
+    setPaymentProcessing(false);
     if (success) {
       setPaymentCompleted(true);
-      alert("Payment completed successfully! Registration confirmed.");
+      // alert("Payment completed successfully! Registration confirmed.");
     } else {
       alert("Payment processing failed. Please try again.");
     }
@@ -569,6 +574,9 @@ export default function WorkshopForm() {
                       className="btn flex-1 bg-linear-to-t from-indigo-600 to-indigo-500 bg-[length:100%_100%] bg-[bottom] text-white shadow-[inset_0px_1px_0px_0px_--theme(--color-white/.16)] hover:bg-[length:100%_150%]"
                     >
                       Complete Payment
+                      {paymentProcessing && (
+                        <div className="inline-block h-4 w-4 ml-2 animate-spin rounded-full border-2 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"></div>
+                      )}
                     </button>
                   </div>
                 </div>
