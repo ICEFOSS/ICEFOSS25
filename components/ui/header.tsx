@@ -12,13 +12,12 @@ export default function Header() {
           <div className="flex flex-1 items-center">
             {/* <Logo />  */}
             <Link href="/">
-             <img
-              src="/icefoss.png"
-              alt="ICEFOSS Logo"
-              className="w-32 h-auto object-contain"
-            />
+              <img
+                src="/icefoss.png"
+                alt="ICEFOSS Logo"
+                className="w-32 h-auto object-contain"
+              />
             </Link>
-           
           </div>
           <ul className="hidden md:flex flex-1 items-center justify-around gap-10 ">
             <li>
@@ -63,7 +62,7 @@ export default function Header() {
             </li> */}
             <li>
               <Link
-                href="/"
+                href="/register"
                 className="btn-sm bg-linear-to-tr  from-[#FFE000] to-[#01F791]  text-black font-semibold bg-[length:100%_100%] bg-[bottom] py-[5px]  shadow-[inset_0px_1px_0px_0px_--theme(--color-white/.16)] hover:bg-[length:100%_150%]"
               >
                 Register

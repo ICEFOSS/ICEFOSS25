@@ -25,7 +25,9 @@ export default function HeroHome() {
                 className="mb-3 text-lg md:text-xl text-indigo-200/80 leading-relaxed"
                 data-aos="fade-up"
                 data-aos-delay={200}
-              >International Conference on Emerging Trends in Free and Open Source Software
+              >
+                International Conference on Emerging Trends in Free and Open
+                Source Software
               </p>
 
               <p
@@ -39,8 +41,8 @@ export default function HeroHome() {
               <div className="mx-auto max-w-xs sm:flex sm:max-w-none sm:justify-center">
                 <div data-aos="fade-up" data-aos-delay={400}>
                   <a
-                    className="btn group mb-4 w-full md:px-12 bg-gradient-to-tr from-[#FFE000] to-[#01F791] text-lg text-black font-semibold shadow-md hover:opacity-90 transition sm:mb-0 sm:w-auto"
-                    href="/"
+                    className="btn group mb-4 w-full md:px-12 bg-gradient-to-tr from-[#FFE000] to-[#01F791]  text-black  text-lg font-semibold shadow-md hover:opacity-90 transition sm:mb-0 sm:w-auto"
+                    href="/register"
                   >
                     <span className="relative inline-flex items-center">
                       Register Now

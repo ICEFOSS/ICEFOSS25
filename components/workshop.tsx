@@ -17,9 +17,9 @@ const sectionData = {
 const featuresData = [
   {
     id: 1,
-    title: "Kickstart Your Journey in Data Science & ML",
+    title: "Intro to Data Science & Machine Learning",
     description:
-      "Understand the Basics – Learn what Data Science and ML are, why they matter, and how they’re applied in real life. Discover the career paths, skills, and opportunities available in the field.",
+      "Get started with the fundamentals of Data Science and ML. Learn why they matter, where they're used, and explore career paths in this fast-growing field.",
     icon: (
       <svg
         className="mb-3 fill-[#01f791]"
@@ -31,15 +31,14 @@ const featuresData = [
         <path d="M3 3h2v18H3V3Zm8 6h2v12h-2V9Zm8-4h2v16h-2V5Z" />
       </svg>
     ),
-    date: " 11/9/2025",
+    date: "September 11, 2025",
     price: 250,
   },
   {
     id: 2,
-    title:
-      "Mastering GenAI & Retrieval Augmented Generation (RAG): From Fundamentals to Real-World Applications",
+    title: "Generative AI & RAG in Action",
     description:
-      "Dive into the world of Generative AI and Retrieval Augmented Generation (RAG). Learn how GenAI models like LLMs work, and how RAG enhances them with external knowledge for more accurate, context-aware applications. Explore practical implementations in chatbots, knowledge assistants, and enterprise search solutions",
+      "Learn how Generative AI and Retrieval-Augmented Generation (RAG) power smarter chatbots, knowledge assistants, and enterprise search. Covers concepts, tools, and real-world use cases.",
     icon: (
       <svg
         className="mb-3 fill-[#01f791]"
@@ -54,14 +53,14 @@ const featuresData = [
         <path d="M12 17c1.5 0 3-1.5 3-3h-6c0 1.5 1.5 3 3 3Z" />
       </svg>
     ),
-    date: "11/9/2025-12/9/2025 (Two day)",
+    date: "September 11–12, 2025 (Two days)",
     price: 500,
   },
   {
     id: 3,
-    title: "Hugging face",
+    title: "NLP with Hugging Face",
     description:
-      "Discover the power of Natural Language Processing with Hugging Face. Learn how to build and fine-tune state-of-the-art transformer models for text classification, sentiment analysis, chatbots, and more using the Transformers library.",
+      "Build and fine-tune cutting-edge transformer models for text classification, sentiment analysis, and chatbots using Hugging Face Transformers.",
     icon: (
       <svg
         className="mb-3 fill-[#01f791]"
@@ -73,14 +72,14 @@ const featuresData = [
         <path d="M4 4h16v10H5.17L4 15.17V4Zm2 2v6h12V6H6Zm0 12h12v2H6v-2Z" />
       </svg>
     ),
-    date: "11/9/2025",
+    date: "September 11, 2025",
     price: 250,
   },
   {
     id: 4,
-    title: "WEBCRAFT- MERNSTACK",
+    title: "Full-Stack Web Development with MERN",
     description:
-      "Master modern web development with MongoDB, Express.js, React, and Node.js. Learn to build dynamic, scalable full-stack applications from backend to frontend with real-world deployment practices.",
+      "Learn to build scalable, production-ready apps with MongoDB, Express.js, React, and Node.js. Covers both backend and frontend, with deployment best practices.",
     icon: (
       <svg
         className="mb-3 fill-[#01f791]"
@@ -92,7 +91,7 @@ const featuresData = [
         <path d="M8.293 6.293 2.586 12l5.707 5.707L9.707 16.293 5.414 12l4.293-4.293-1.414-1.414ZM15.707 6.293 14.293 7.707 18.586 12l-4.293 4.293 1.414 1.414L21.414 12l-5.707-5.707Z" />
       </svg>
     ),
-    date: "12/9/2025",
+    date: "September 12, 2025",
     price: 250,
   },
 ];
@@ -163,11 +162,6 @@ export default function Workshop() {
                   {feature.title}
                 </h3>
                 <p className="text-indigo-200/65">{feature.description}</p>
-                {/* <p className="mt-3 flex items-center gap-2 text-sm text-indigo-200/70">
-                  <Calendar className="h-4 w-4 text-indigo-400 drop-shadow-[0_0_6px_rgba(99,102,241,0.8)]" />
-                  <span className="font-medium">{feature.date}</span>
-                </p>
-               */}
                 <p className="mt-3 flex items-center gap-6 text-sm text-indigo-200/70">
                   {/* Date */}
                   <span className="flex items-center gap-2">
