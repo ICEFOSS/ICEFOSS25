@@ -41,13 +41,13 @@ export default function Header() {
                 className="w-14 h-14 object-contain"
               />
             </li>
-            <li>
+            {/* <li>
               <img
                 src="/logos/ACM FISAT logo.png"
                 alt="ICEFOSS Logo"
                 className="w-14 h-14 object-contain"
               />
-            </li>
+            </li> */}
           </ul>
 
           {/* Desktop sign in links */}

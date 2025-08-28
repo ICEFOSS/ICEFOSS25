@@ -36,6 +36,38 @@ export default function ContactUs() {
               <p>FISAT, Angamaly, Kerala</p>
             </div>
           </div>
+          <div className="mt-5">
+            <ul className="flex flex-1 items-center justify-around gap-1 ">
+            <li>
+              <img
+                src="/logos/FISATLOGO.png"
+                alt="ICEFOSS Logo"
+                className="w-14 h-14 object-contain"
+              />
+            </li>
+            <li>
+              <img
+                src="/logos/icc white.png"
+                alt="ICEFOSS Logo"
+                className="w-14 h-14  object-contain"
+              />
+            </li>
+            <li>
+              <img
+                src="/logos/FFSC.png"
+                alt="ICEFOSS Logo"
+                className="w-14 h-14 object-contain"
+              />
+            </li>
+            {/* <li>
+              <img
+                src="/logos/ACM FISAT logo.png"
+                alt="ICEFOSS Logo"
+                className="w-14 h-14 object-contain"
+              />
+            </li> */}
+          </ul>
+          </div>
         </div>
       </div>
     </section>

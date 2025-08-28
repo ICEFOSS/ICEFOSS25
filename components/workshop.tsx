@@ -17,9 +17,9 @@ const sectionData = {
 const featuresData = [
   {
     id: 1,
-    title: "Intro to Data Science & Machine Learning",
+    title: "Workshop 1 - Hugging Face",
     description:
-      "Get started with the fundamentals of Data Science and ML. Learn why they matter, where they're used, and explore career paths in this fast-growing field.",
+    "Build and fine-tune cutting-edge transformer models for text classification, sentiment analysis, and chatbots using Hugging Face Transformers.",
     icon: (
       <svg
         className="mb-3 fill-[#01f791]"
@@ -27,8 +27,8 @@ const featuresData = [
         width={24}
         height={24}
         viewBox="0 0 24 24"
-      >
-        <path d="M3 3h2v18H3V3Zm8 6h2v12h-2V9Zm8-4h2v16h-2V5Z" />
+        >
+        <path d="M4 4h16v10H5.17L4 15.17V4Zm2 2v6h12V6H6Zm0 12h12v2H6v-2Z" />
       </svg>
     ),
     date: "September 11, 2025",
@@ -36,7 +36,7 @@ const featuresData = [
   },
   {
     id: 2,
-    title: "Generative AI & RAG in Action",
+    title: "Workshop 2 - Generative AI & RAG",
     description:
       "Learn how Generative AI and Retrieval-Augmented Generation (RAG) power smarter chatbots, knowledge assistants, and enterprise search. Covers concepts, tools, and real-world use cases.",
     icon: (
@@ -58,9 +58,9 @@ const featuresData = [
   },
   {
     id: 3,
-    title: "NLP with Hugging Face",
+    title: "Workshop 3 - Data Science & Machine Learning",
     description:
-      "Build and fine-tune cutting-edge transformer models for text classification, sentiment analysis, and chatbots using Hugging Face Transformers.",
+      "Get started with the fundamentals of Data Science and ML. Learn why they matter, where they're used, and explore career paths in this fast-growing field.",
     icon: (
       <svg
         className="mb-3 fill-[#01f791]"
@@ -69,15 +69,15 @@ const featuresData = [
         height={24}
         viewBox="0 0 24 24"
       >
-        <path d="M4 4h16v10H5.17L4 15.17V4Zm2 2v6h12V6H6Zm0 12h12v2H6v-2Z" />
+        <path d="M3 3h2v18H3V3Zm8 6h2v12h-2V9Zm8-4h2v16h-2V5Z" />
       </svg>
     ),
-    date: "September 11, 2025",
+    date: "September 12, 2025",
     price: 250,
   },
   {
     id: 4,
-    title: "Full-Stack Web Development with MERN",
+    title: "Workshop 4 - Full-Stack Web Development with MERN",
     description:
       "Learn to build scalable, production-ready apps with MongoDB, Express.js, React, and Node.js. Covers both backend and frontend, with deployment best practices.",
     icon: (

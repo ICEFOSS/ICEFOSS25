@@ -1,34 +1,34 @@
-"use client";
+"use client"
 
-import type React from "react";
-import { useState } from "react";
-import { Calendar, DollarSign, IndianRupee } from "lucide-react";
+import type React from "react"
+import { useState } from "react"
+import { Calendar, IndianRupee } from "lucide-react"
 
 const metadata = {
   title: "Workshop Registration - Open PRO",
   description: "Register for our workshop",
-};
+}
 
 const workshopNames = [
   {
-    value: "intro-data-science",
-    label: "Intro to Data Science & Machine Learning",
-    title: "Intro to Data Science & Machine Learning",
+    value: "hugging-face",
+    label: "Hugging Face",
+    title: "Hugging Face",
     date: "September 11, 2025",
     price: 250,
   },
   {
     value: "generative-ai-rag",
-    label: "Generative AI & RAG in Action",
-    title: "Generative AI & RAG in Action",
+    label: "Generative AI & RAG",
+    title: "Generative AI & RAG",
     date: "September 11–12, 2025 (Two days)",
     price: 500,
   },
   {
-    value: "nlp-hugging-face",
-    label: "NLP with Hugging Face",
-    title: "NLP with Hugging Face",
-    date: "September 11, 2025",
+    value: "intro-data-science",
+    label: "Data Science & Machine Learning",
+    title: "Data Science & Machine Learning",
+    date: "September 12, 2025",
     price: 250,
   },
   {
@@ -38,232 +38,201 @@ const workshopNames = [
     date: "September 12, 2025",
     price: 250,
   },
-];
+]
+
+const departments = [
+  { value: "CE", label: "Civil Engineering – CE" },
+  { value: "CSE", label: "Computer Science and Engineering – CSE" },
+  { value: "EEE", label: "Electrical and Electronics Engineering – EEE" },
+  { value: "ECE", label: "Electronics and Communication Engineering – ECE" },
+  { value: "EIE", label: "Electronics and Instrumentation Engineering – EIE" },
+  { value: "ME", label: "Mechanical Engineering – ME" },
+]
 
 export default function WorkshopForm() {
-  const [currentStep, setCurrentStep] = useState<
-    "selection" | "registration" | "payment"
-  >("selection");
-  const [selectedWorkshop, setSelectedWorkshop] = useState<
-    (typeof workshopNames)[0] | null
-  >(null);
+  const [currentStep, setCurrentStep] = useState<"selection" | "registration" | "payment">("selection")
+  const [selectedWorkshop, setSelectedWorkshop] = useState<(typeof workshopNames)[0] | null>(null)
 
   const [formData, setFormData] = useState({
     fullName: "",
     institution: "",
-    yearOfStudy: "",
+    semester: "",
+    department: "",
+    batch: "",
     email: "",
     contactNumber: "",
     workshopName: "",
-    isAcmMember: false,
     foodPreference: "",
     paymentScreenshot: null as File | null,
-  });
+  })
 
-  const [showPayment, setShowPayment] = useState(false);
-  const [paymentCompleted, setPaymentCompleted] = useState(false);
-  const [paymentProcessing, setPaymentProcessing] = useState(false);
+  const [showPayment, setShowPayment] = useState(false)
+  const [paymentCompleted, setPaymentCompleted] = useState(false)
+  const [paymentProcessing, setPaymentProcessing] = useState(false)
 
   const handleWorkshopSelect = (workshop: (typeof workshopNames)[0]) => {
-    setSelectedWorkshop(workshop);
+    setSelectedWorkshop(workshop)
     setFormData((prev) => ({
       ...prev,
       workshopName: workshop.value,
-    }));
-    setCurrentStep("registration");
-  };
+    }))
+    setCurrentStep("registration")
+  }
 
   const validateFormData = () => {
     const requiredFields = [
       "fullName",
       "institution",
-      "yearOfStudy",
+      "semester",
+      "department",
+      "batch",
       "email",
       "contactNumber",
       "workshopName",
-      "foodPreference",
-    ];
+      // "foodPreference",
+    ]
 
     for (const field of requiredFields) {
       if (!formData[field as keyof typeof formData]) {
-        alert(
-          `Please fill in the ${field
-            .replace(/([A-Z])/g, " $1")
-            .toLowerCase()} field.`
-        );
-        return false;
+        alert(`Please fill in the ${field.replace(/([A-Z])/g, " $1").toLowerCase()} field.`)
+        return false
       }
     }
 
     if (!formData.paymentScreenshot) {
-      alert("Please upload payment confirmation screenshot.");
-      return false;
+      alert("Please upload payment confirmation screenshot.")
+      return false
     }
 
-    return true;
-  };
-  //cloudinary fucntion for uploading screenshots
+    return true
+  }
+
+  // cloudinary function for uploading screenshots
   async function uploadToCloudinary(file: File) {
-    const fd = new FormData();
-    fd.append("file", file);
-    fd.append("upload_preset", "registration"); // from Cloudinary
-    fd.append("folder", "icefoss");
+    const fd = new FormData()
+    fd.append("file", file)
+    fd.append("upload_preset", "registration") // from Cloudinary
+    fd.append("folder", "icefoss")
 
-    const res = await fetch(
-      "https://api.cloudinary.com/v1_1/dmlzfwdk2/image/upload",
-      {
-        method: "POST",
-        body: fd,
-      }
-    );
+    const res = await fetch("https://api.cloudinary.com/v1_1/dmlzfwdk2/image/upload", {
+      method: "POST",
+      body: fd,
+    })
 
-    if (!res.ok) throw new Error("Upload failed");
+    if (!res.ok) throw new Error("Upload failed")
 
-    const data = await res.json();
-    return { url: data.secure_url, publicId: data.public_id };
+    const data = await res.json()
+    return { url: data.secure_url, publicId: data.public_id }
   }
 
   const sendPaymentData = async () => {
-    const paymentData = new FormData();
+    const paymentData = new FormData()
     try {
-      let screenshotUrl = "";
-      let publicId = "";
+      let screenshotUrl = ""
+      let publicId = ""
 
-      //Upload to Cloudinary
+      // Upload to Cloudinary
       if (formData.paymentScreenshot instanceof File) {
-        const result = await uploadToCloudinary(formData.paymentScreenshot);
-        screenshotUrl = result.url;
-        publicId = result.publicId;
+        const result = await uploadToCloudinary(formData.paymentScreenshot)
+        screenshotUrl = result.url
+        publicId = result.publicId
       }
 
-      const paymentData = new URLSearchParams();
+      const paymentData = new URLSearchParams()
       Object.entries(formData).forEach(([key, value]) => {
         if (key === "paymentScreenshot") {
-          if (screenshotUrl) paymentData.append("screenshotUrl", screenshotUrl);
-          if (publicId) paymentData.append("publicId", publicId);
+          if (screenshotUrl) paymentData.append("screenshotUrl", screenshotUrl)
+          if (publicId) paymentData.append("publicId", publicId)
         } else {
-          paymentData.append(key, String(value));
+          paymentData.append(key, String(value))
         }
-      });
+      })
       // Google Apps Script
       const response = await fetch(
         "https://script.google.com/macros/s/AKfycbzbpQUJbt6KCkdnA1uJHYR0TEDnOh7sg4bZ51ZeshQXgWInIpgswS190HgPehJjN11Zig/exec",
         {
           method: "POST",
           body: paymentData,
-        }
-      );
+        },
+      )
 
       if (response.ok) {
-        console.log("Payment processed successfully:", await response.text());
-        return true;
+        console.log("Payment processed successfully:", await response.text())
+        return true
       } else {
-        console.error("Payment processing failed:", response.statusText);
-        return false;
+        console.error("Payment processing failed:", response.statusText)
+        return false
       }
     } catch (error) {
-      console.error("API request error:", error);
-      setPaymentProcessing(false);
+      console.error("API request error:", error)
+      setPaymentProcessing(false)
 
-      return false;
+      return false
     }
-  };
-  /*Object.entries(formData).forEach(([key, value]) => {
-      if (key === "paymentScreenshot" && value instanceof File) {
-        paymentData.append("paymentScreenshot", value);
-      } else if (key !== "paymentScreenshot") {
-        paymentData.append(key, String(value));
-      }
-    });
-    
+  }
 
-    try {
-      const response = await fetch("http://localhost:4000", {
-        //dummy api
-        method: "POST",
-        body: paymentData,
-      });
-
-      if (response.ok) {
-        const result = await response.json();
-        console.log("Payment processed successfully:", result);
-        return true;
-      } else {
-        console.error("Payment processing failed:", response.statusText);
-        return false;
-      }
-    } catch (error) {
-      console.error("API request error:", error);
-      return false;
-    }
-  };
-  */
-
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
-    const { name, value, type } = e.target;
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value, type } = e.target
     setFormData((prev) => ({
       ...prev,
-      [name]:
-        type === "checkbox" ? (e.target as HTMLInputElement).checked : value,
-    }));
-  };
+      [name]: type === "checkbox" ? (e.target as HTMLInputElement).checked : value,
+    }))
+  }
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Form submitted with data:", formData);
-    setCurrentStep("payment");
-    setShowPayment(true);
-  };
+    e.preventDefault()
+    console.log("Form submitted with data:", formData)
+    setCurrentStep("payment")
+    setShowPayment(true)
+  }
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
+    const file = e.target.files?.[0]
     if (file) {
       setFormData((prev) => ({
         ...prev,
         paymentScreenshot: file,
-      }));
-      console.log("Payment screenshot uploaded:", file.name);
+      }))
+      console.log("Payment screenshot uploaded:", file.name)
     }
-  };
+  }
 
   const handleCompletePayment = async () => {
-    setPaymentProcessing(true);
+    setPaymentProcessing(true)
     if (!validateFormData()) {
-      setPaymentProcessing(false);
-      return;
+      setPaymentProcessing(false)
+      return
     }
 
-    console.log("Sending payment data:", formData);
-    const success = await sendPaymentData();
-    setPaymentProcessing(false);
+    console.log("Sending payment data:", formData)
+    const success = await sendPaymentData()
+    setPaymentProcessing(false)
     if (success) {
-      setPaymentCompleted(true);
+      setPaymentCompleted(true)
       // alert("Payment completed successfully! Registration confirmed.");
     } else {
-      alert("Payment processing failed. Please try again.");
+      alert("Payment processing failed. Please try again.")
     }
-  };
+  }
 
   const handleBackToForm = () => {
-    setShowPayment(false);
-    setCurrentStep("registration");
+    setShowPayment(false)
+    setCurrentStep("registration")
     setFormData((prev) => ({
       ...prev,
       paymentScreenshot: null,
-    }));
-    setPaymentCompleted(false);
-  };
+    }))
+    setPaymentCompleted(false)
+  }
 
   const handleBackToSelection = () => {
-    setCurrentStep("selection");
-    setSelectedWorkshop(null);
+    setCurrentStep("selection")
+    setSelectedWorkshop(null)
     setFormData((prev) => ({
       ...prev,
       workshopName: "",
-    }));
-  };
+    }))
+  }
 
   return (
     <section>
@@ -275,8 +244,8 @@ export default function WorkshopForm() {
               {currentStep === "selection"
                 ? "Select Workshop"
                 : currentStep === "payment"
-                ? "Complete Payment"
-                : "Workshop Registration"}
+                  ? "Complete Payment"
+                  : "Workshop Registration"}
             </h1>
           </div>
 
@@ -289,9 +258,7 @@ export default function WorkshopForm() {
                     className="cursor-pointer rounded-lg border border-indigo-200/20 bg-white/5 p-6 transition-all hover:border-indigo-200/40 hover:bg-white/10"
                     onClick={() => handleWorkshopSelect(workshop)}
                   >
-                    <h3 className="mb-3 text-lg font-semibold text-indigo-200">
-                      {workshop.title}
-                    </h3>
+                    <h3 className="mb-3 text-lg font-semibold text-indigo-200">{workshop.title}</h3>
                     <div className="mb-4 space-y-2 text-sm text-indigo-200/65">
                       <div className="flex items-center gap-2">
                         <Calendar className="h-4 w-4" />
@@ -299,9 +266,7 @@ export default function WorkshopForm() {
                       </div>
                       <div className="flex items-center gap-2">
                         <IndianRupee className="h-4 w-4" />
-                        <span className="font-semibold text-indigo-200">
-                          {workshop.price}
-                        </span>
+                        <span className="font-semibold text-indigo-200">{workshop.price}</span>
                       </div>
                     </div>
                     <button className="w-full rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-indigo-700">
@@ -320,9 +285,7 @@ export default function WorkshopForm() {
                 <div className="mb-6 rounded-lg border border-indigo-200/20 bg-white/5 p-4">
                   <div className="flex items-center justify-between">
                     <div>
-                      <h3 className="font-semibold text-indigo-200">
-                        {selectedWorkshop.title}
-                      </h3>
+                      <h3 className="font-semibold text-indigo-200">{selectedWorkshop.title}</h3>
                       <p className="text-sm text-indigo-200/65">
                         {selectedWorkshop.date} • ₹{selectedWorkshop.price}
                       </p>
@@ -340,10 +303,7 @@ export default function WorkshopForm() {
 
               <div className="space-y-5">
                 <div>
-                  <label
-                    className="mb-1 block text-sm font-medium text-indigo-200/65"
-                    htmlFor="fullName"
-                  >
+                  <label className="mb-1 block text-sm font-medium text-indigo-200/65" htmlFor="fullName">
                     Full Name <span className="text-red-600">*</span>
                   </label>
                   <input
@@ -358,10 +318,7 @@ export default function WorkshopForm() {
                   />
                 </div>
                 <div>
-                  <label
-                    className="mb-1 block text-sm font-medium text-indigo-200/65"
-                    htmlFor="institution"
-                  >
+                  <label className="mb-1 block text-sm font-medium text-indigo-200/65" htmlFor="institution">
                     Institution <span className="text-red-600">*</span>
                   </label>
                   <input
@@ -376,32 +333,66 @@ export default function WorkshopForm() {
                   />
                 </div>
                 <div>
-                  <label
-                    className="mb-1 block text-sm font-medium text-indigo-200/65"
-                    htmlFor="yearOfStudy"
-                  >
-                    Year of Study <span className="text-red-600">*</span>
+                  <label className="mb-1 block text-sm font-medium text-indigo-200/65" htmlFor="semester">
+                    Semester <span className="text-red-600">*</span>
                   </label>
                   <select
-                    id="yearOfStudy"
-                    name="yearOfStudy"
+                    id="semester"
+                    name="semester"
                     className="form-input w-full"
-                    value={formData.yearOfStudy}
+                    value={formData.semester}
                     onChange={handleInputChange}
                     required
                   >
-                    <option value="">Select year of study</option>
-                    <option value="1">1 year</option>
-                    <option value="2">2 years</option>
-                    <option value="3">3 years</option>
-                    <option value="4">4 years</option>
+                    <option value="">Select semester</option>
+                    <option value="S1">S1</option>
+                    <option value="S3">S3</option>
+                    <option value="S5">S5</option>
+                    <option value="S7">S7</option>
                   </select>
                 </div>
                 <div>
-                  <label
-                    className="mb-1 block text-sm font-medium text-indigo-200/65"
-                    htmlFor="email"
+                  <label className="mb-1 block text-sm font-medium text-indigo-200/65" htmlFor="department">
+                    Department <span className="text-red-600">*</span>
+                  </label>
+                  <select
+                    id="department"
+                    name="department"
+                    className="form-input w-full"
+                    value={formData.department}
+                    onChange={handleInputChange}
+                    required
                   >
+                    <option value="">Select department</option>
+                    {departments.map((dept) => (
+                      <option key={dept.value} value={dept.value}>
+                        {dept.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <label className="mb-1 block text-sm font-medium text-indigo-200/65" htmlFor="batch">
+                    Batch <span className="text-red-600">*</span>{"  "}<span className="text-indigo-200/40 italic">Select 'A' if no batch</span>
+                  </label>
+                  <select
+                    id="batch"
+                    name="batch"
+                    className="form-input w-full"
+                    value={formData.batch}
+                    onChange={handleInputChange}
+                    required
+                  >
+                    <option value="">Select batch</option>
+                    {/* <option value="none">None</option> */}
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="mb-1 block text-sm font-medium text-indigo-200/65" htmlFor="email">
                     Email <span className="text-red-600">*</span>
                   </label>
                   <input
@@ -416,10 +407,7 @@ export default function WorkshopForm() {
                   />
                 </div>
                 <div>
-                  <label
-                    className="mb-1 block text-sm font-medium text-indigo-200/65"
-                    htmlFor="contactNumber"
-                  >
+                  <label className="mb-1 block text-sm font-medium text-indigo-200/65" htmlFor="contactNumber">
                     Contact Number <span className="text-red-600">*</span>
                   </label>
                   <input
@@ -433,21 +421,7 @@ export default function WorkshopForm() {
                     required
                   />
                 </div>
-                <div>
-                  <label className="flex items-center gap-2">
-                    <input
-                      type="checkbox"
-                      name="isAcmMember"
-                      className="form-checkbox text-indigo-500"
-                      checked={formData.isAcmMember}
-                      onChange={handleInputChange}
-                    />
-                    <span className="text-sm font-medium text-indigo-200/65">
-                      Are you an ACM member?
-                    </span>
-                  </label>
-                </div>
-                <div>
+                {/* <div>
                   <label className="mb-1 block text-sm font-medium text-indigo-200/65">
                     Food Preference <span className="text-red-600">*</span>
                   </label>
@@ -460,11 +434,9 @@ export default function WorkshopForm() {
                         className="form-radio text-indigo-500"
                         checked={formData.foodPreference === "vegetarian"}
                         onChange={handleInputChange}
-                        required
+                        // required
                       />
-                      <span className="text-sm text-indigo-200/65">
-                        Vegetarian
-                      </span>
+                      <span className="text-sm text-indigo-200/65">Vegetarian</span>
                     </label>
                     <label className="flex items-center gap-2">
                       <input
@@ -474,14 +446,12 @@ export default function WorkshopForm() {
                         className="form-radio text-indigo-500"
                         checked={formData.foodPreference === "non-vegetarian"}
                         onChange={handleInputChange}
-                        required
+                        // required
                       />
-                      <span className="text-sm text-indigo-200/65">
-                        Non-Vegetarian
-                      </span>
+                      <span className="text-sm text-indigo-200/65">Non-Vegetarian</span>
                     </label>
                   </div>
-                </div>
+                </div> */}
               </div>
               <div className="mt-6">
                 <button
@@ -502,11 +472,7 @@ export default function WorkshopForm() {
                   {/* QR Code Section */}
                   <div className="text-center">
                     <div className="mx-auto mb-4 flex h-64 w-64 items-center justify-center rounded-lg border-2 border-indigo-200/20 bg-white/5">
-                      <img
-                        src="/payment_qr.png"
-                        alt="Payment QR Code"
-                        className="h-48 w-48"
-                      />
+                      <img src="/payment_qr.png" alt="Payment QR Code" className="h-48 w-48" />
                     </div>
                     <p className="text-sm text-indigo-200/65">abcd@upi</p>
                     <p className="text-sm text-indigo-200/65">+91 8989898989</p>
@@ -514,21 +480,15 @@ export default function WorkshopForm() {
 
                   {/* Payment Details */}
                   <div className="rounded-lg border border-indigo-200/20 bg-white/5 p-6">
-                    <h3 className="mb-4 text-lg font-semibold text-indigo-200">
-                      Payment Details
-                    </h3>
+                    <h3 className="mb-4 text-lg font-semibold text-indigo-200">Payment Details</h3>
                     <div className="space-y-2 text-sm text-indigo-200/65">
                       <div className="flex justify-between">
                         <span>Workshop:</span>
-                        <span className="text-indigo-200">
-                          {selectedWorkshop?.title || "Selected Workshop"}
-                        </span>
+                        <span className="text-indigo-200">{selectedWorkshop?.title || "Selected Workshop"}</span>
                       </div>
                       <div className="flex justify-between">
                         <span>Registration Fee:</span>
-                        <span className="text-indigo-200">
-                          ₹{selectedWorkshop?.price || 500}
-                        </span>
+                        <span className="text-indigo-200">₹{selectedWorkshop?.price || 500}</span>
                       </div>
                       <hr className="border-indigo-200/20" />
                       <div className="flex justify-between font-semibold text-indigo-200">
@@ -540,13 +500,9 @@ export default function WorkshopForm() {
 
                   {/* File Upload Section */}
                   <div className="space-y-4">
-                    <h3 className="text-lg font-semibold text-indigo-200">
-                      Upload Payment Confirmation
-                    </h3>
+                    <h3 className="text-lg font-semibold text-indigo-200">Upload Payment Confirmation</h3>
                     <div>
-                      <label className="mb-2 block text-sm font-medium text-indigo-200/65">
-                        Payment Screenshot
-                      </label>
+                      <label className="mb-2 block text-sm font-medium text-indigo-200/65">Payment Screenshot</label>
                       <input
                         type="file"
                         accept="image/*"
@@ -584,26 +540,13 @@ export default function WorkshopForm() {
                 /* Payment completion confirmation */
                 <div className="text-center">
                   <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-green-500/20">
-                    <svg
-                      className="h-10 w-10 text-green-400"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M5 13l4 4L19 7"
-                      />
+                    <svg className="h-10 w-10 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
-                  <h2 className="mb-4 text-2xl font-semibold text-indigo-200">
-                    Payment Completed!
-                  </h2>
+                  <h2 className="mb-4 text-2xl font-semibold text-indigo-200">Payment Completed!</h2>
                   <p className="mb-6 text-indigo-200/65">
-                    Your workshop registration has been confirmed. You will
-                    receive a confirmation email shortly.
+                    Your workshop registration has been confirmed.
                   </p>
                   <button
                     onClick={() => (window.location.href = "/")}
@@ -618,5 +561,5 @@ export default function WorkshopForm() {
         </div>
       </div>
     </section>
-  );
+  )
 }
