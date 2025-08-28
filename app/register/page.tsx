@@ -113,7 +113,7 @@ export default function WorkshopForm() {
     });
 
     try {
-      const response = await fetch("http://localhost:4000/", {
+      const response = await fetch("http://localhost:4000", {
         //dummy api
         method: "POST",
         body: paymentData,
