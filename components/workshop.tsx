@@ -31,7 +31,7 @@ const featuresData = [
         <path d="M4 4h16v10H5.17L4 15.17V4Zm2 2v6h12V6H6Zm0 12h12v2H6v-2Z" />
       </svg>
     ),
-    date: "September 11, 2025",
+    date: "September 12, 2025",
     price: 299,
   },
   {

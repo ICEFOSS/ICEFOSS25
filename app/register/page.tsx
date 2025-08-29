@@ -14,7 +14,7 @@ const workshopNames = [
     value: "hugging-face",
     label: "Hugging Face",
     title: "Intro to Hugging Face: Train, Tune, Deploy",
-    date: "September 11, 2025",
+    date: "September 12, 2025",
     price: 299,
   },
   {
