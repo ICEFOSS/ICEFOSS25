@@ -17,7 +17,7 @@ const sectionData = {
 const featuresData = [
   {
     id: 1,
-    title: "Workshop 1 - Hugging Face",
+    title: "Intro to Hugging Face: Train, Tune, Deploy",
     description:
     "Build and fine-tune cutting-edge transformer models for text classification, sentiment analysis, and chatbots using Hugging Face Transformers.",
     icon: (
@@ -32,11 +32,11 @@ const featuresData = [
       </svg>
     ),
     date: "September 11, 2025",
-    price: 250,
+    price: 299,
   },
   {
     id: 2,
-    title: "Workshop 2 - Generative AI & RAG",
+    title: "Mastering GenAI & Retrieval Augmented Generation (RAG): From Fundamentals to Real-World Applications",
     description:
       "Learn how Generative AI and Retrieval-Augmented Generation (RAG) power smarter chatbots, knowledge assistants, and enterprise search. Covers concepts, tools, and real-world use cases.",
     icon: (
@@ -54,11 +54,11 @@ const featuresData = [
       </svg>
     ),
     date: "September 11–12, 2025 (Two days)",
-    price: 500,
+    price: 449,
   },
   {
     id: 3,
-    title: "Workshop 3 - Data Science & Machine Learning",
+    title: "Kickstart Your Journey in Data Science & ML",
     description:
       "Get started with the fundamentals of Data Science and ML. Learn why they matter, where they're used, and explore career paths in this fast-growing field.",
     icon: (
@@ -73,11 +73,11 @@ const featuresData = [
       </svg>
     ),
     date: "September 12, 2025",
-    price: 250,
+    price: 299,
   },
   {
     id: 4,
-    title: "Workshop 4 - Full-Stack Web Development with MERN",
+    title: "WEBCRAFT MERNSTACK",
     description:
       "Learn to build scalable, production-ready apps with MongoDB, Express.js, React, and Node.js. Covers both backend and frontend, with deployment best practices.",
     icon: (
@@ -92,7 +92,7 @@ const featuresData = [
       </svg>
     ),
     date: "September 12, 2025",
-    price: 250,
+    price: 299,
   },
 ];
 
@@ -159,7 +159,7 @@ export default function Workshop() {
               <article key={feature.id}>
                 {feature.icon}
                 <h3 className="mb-1 font-nacelle text-[1rem] font-semibold text-gray-200">
-                  {feature.title}
+                  <span className="bg-gradient-to-br from-[#FFE000] to-[#01F791] bg-clip-text text-transparent font-light ">Workshop {feature.id}</span> - {feature.title}
                 </h3>
                 <p className="text-indigo-200/65">{feature.description}</p>
                 <p className="mt-3 flex items-center gap-6 text-sm text-indigo-200/70">

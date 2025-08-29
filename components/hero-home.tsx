@@ -42,8 +42,8 @@ export default function HeroHome() {
                 <div data-aos="fade-up" data-aos-delay={400}>
                   <a
                     className="btn group mb-4 w-full md:px-12 bg-gradient-to-tr from-[#FFE000] to-[#01F791]  text-black  text-lg font-semibold shadow-md hover:opacity-90 transition sm:mb-0 sm:w-auto"
-                    // href="/register" 
-                    href="/"
+                    href="/register" 
+                    // href="/"
                   >
                     <span className="relative inline-flex items-center">
                       Registration Opening Soon

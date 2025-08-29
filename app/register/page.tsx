@@ -13,30 +13,30 @@ const workshopNames = [
   {
     value: "hugging-face",
     label: "Hugging Face",
-    title: "Hugging Face",
+    title: "Intro to Hugging Face: Train, Tune, Deploy",
     date: "September 11, 2025",
-    price: 250,
+    price: 299,
   },
   {
     value: "generative-ai-rag",
     label: "Generative AI & RAG",
-    title: "Generative AI & RAG",
+    title: "Mastering GenAI & Retrieval Augmented Generation (RAG)",
     date: "September 11–12, 2025 (Two days)",
-    price: 500,
+    price: 449,
   },
   {
     value: "intro-data-science",
     label: "Data Science & Machine Learning",
-    title: "Data Science & Machine Learning",
+    title: "Kickstart Your Journey in Data Science & ML",
     date: "September 12, 2025",
-    price: 250,
+    price: 299,
   },
   {
     value: "fullstack-mern",
     label: "Full-Stack Web Development with MERN",
-    title: "Full-Stack Web Development with MERN",
+    title: "WebCraft MERN Stack",
     date: "September 12, 2025",
-    price: 250,
+    price: 299,
   },
 ]
 
@@ -89,7 +89,7 @@ export default function WorkshopForm() {
       "email",
       "contactNumber",
       "workshopName",
-      // "foodPreference",
+      "foodPreference",
     ]
 
     for (const field of requiredFields) {
@@ -414,6 +414,8 @@ export default function WorkshopForm() {
                     id="contactNumber"
                     name="contactNumber"
                     type="tel"
+                    
+                    maxLength={10}
                     className="form-input w-full"
                     placeholder="Your contact number"
                     value={formData.contactNumber}
@@ -421,7 +423,7 @@ export default function WorkshopForm() {
                     required
                   />
                 </div>
-                {/* <div>
+                <div>
                   <label className="mb-1 block text-sm font-medium text-indigo-200/65">
                     Food Preference <span className="text-red-600">*</span>
                   </label>
@@ -434,7 +436,7 @@ export default function WorkshopForm() {
                         className="form-radio text-indigo-500"
                         checked={formData.foodPreference === "vegetarian"}
                         onChange={handleInputChange}
-                        // required
+                        required
                       />
                       <span className="text-sm text-indigo-200/65">Vegetarian</span>
                     </label>
@@ -446,12 +448,12 @@ export default function WorkshopForm() {
                         className="form-radio text-indigo-500"
                         checked={formData.foodPreference === "non-vegetarian"}
                         onChange={handleInputChange}
-                        // required
+                        required
                       />
                       <span className="text-sm text-indigo-200/65">Non-Vegetarian</span>
                     </label>
                   </div>
-                </div> */}
+                </div>
               </div>
               <div className="mt-6">
                 <button
@@ -472,10 +474,12 @@ export default function WorkshopForm() {
                   {/* QR Code Section */}
                   <div className="text-center">
                     <div className="mx-auto mb-4 flex h-64 w-64 items-center justify-center rounded-lg border-2 border-indigo-200/20 bg-white/5">
-                      <img src="/payment_qr.png" alt="Payment QR Code" className="h-48 w-48" />
+                    
+                    <img src={selectedWorkshop?.price === 449 ? "/payment_qr_2day.jpeg" :"/payment_qr_1day.jpeg"} alt="Payment QR Code" className="h-48 w-48" />
+                      {/* <img src="/payment_qr.png" alt="Payment QR Code" className="h-48 w-48" /> */}
                     </div>
-                    <p className="text-sm text-indigo-200/65">abcd@upi</p>
-                    <p className="text-sm text-indigo-200/65">+91 8989898989</p>
+                    <p className="text-sm text-indigo-200/65">UPI ID: nikhilak2005@okicici</p>
+                    <p className="text-sm text-indigo-200/65">Scan QR code to complete payment and upload the screenshot</p>
                   </div>
 
                   {/* Payment Details */}
@@ -488,7 +492,7 @@ export default function WorkshopForm() {
                       </div>
                       <div className="flex justify-between">
                         <span>Registration Fee:</span>
-                        <span className="text-indigo-200">₹{selectedWorkshop?.price || 500}</span>
+                        <span className="text-indigo-200">₹{selectedWorkshop?.price || 449}</span>
                       </div>
                       <hr className="border-indigo-200/20" />
                       <div className="flex justify-between font-semibold text-indigo-200">
