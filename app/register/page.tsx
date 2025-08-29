@@ -2,7 +2,7 @@
 
 import type React from "react"
 import { useState } from "react"
-import { Calendar, IndianRupee } from "lucide-react"
+import { Calendar, IndianRupee, MessageCircle } from "lucide-react"
 
 const metadata = {
   title: "Workshop Registration - Open PRO",
@@ -16,6 +16,7 @@ const workshopNames = [
     title: "Intro to Hugging Face: Train, Tune, Deploy",
     date: "September 12, 2025",
     price: 299,
+    whatsapp: "https://chat.whatsapp.com/CaduBbV0egtH06nJGhaWfV?mode=ems_copy_t"
   },
   {
     value: "generative-ai-rag",
@@ -23,6 +24,7 @@ const workshopNames = [
     title: "Mastering GenAI & Retrieval Augmented Generation (RAG)",
     date: "September 11–12, 2025 (Two days)",
     price: 449,
+    whatsapp: "https://chat.whatsapp.com/EhqEPtUB5QWINv6nQAXOu5?mode=ems_wa_c"
   },
   {
     value: "intro-data-science",
@@ -30,6 +32,7 @@ const workshopNames = [
     title: "Kickstart Your Journey in Data Science & ML",
     date: "September 12, 2025",
     price: 299,
+    whatsapp: "https://chat.whatsapp.com/HrbQArpMht5LDpv2Lo4LqV?mode=ems_wa_c"
   },
   {
     value: "fullstack-mern",
@@ -37,6 +40,7 @@ const workshopNames = [
     title: "WebCraft MERN Stack",
     date: "September 12, 2025",
     price: 299,
+    whatsapp: "https://chat.whatsapp.com/HCLbHX1MUuj61VfMI5VBUq?mode=ems_wa_c"
   },
 ]
 
@@ -552,12 +556,24 @@ export default function WorkshopForm() {
                   <p className="mb-6 text-indigo-200/65">
                     Your workshop registration has been confirmed.
                   </p>
+                  
+                  
                   <button
+                    
+                    className="btn bg-linear-to-t from-green-600 to-green-500 bg-[length:100%_100%] bg-[bottom] text-white shadow-[inset_0px_1px_0px_0px_--theme(--color-white/.16)] hover:bg-[length:100%_150%]"
+                  >
+                    <a href={selectedWorkshop?.whatsapp} className="flex items-center justify-center" target="_blank">
+
+                     <MessageCircle className="h-4 w-4 mr-2" />
+                      Join WhatsApp Group
+                    </a>
+                  </button>
+                  {/* <button
                     onClick={() => (window.location.href = "/")}
                     className="btn bg-linear-to-t from-indigo-600 to-indigo-500 bg-[length:100%_100%] bg-[bottom] text-white shadow-[inset_0px_1px_0px_0px_--theme(--color-white/.16)] hover:bg-[length:100%_150%]"
                   >
                     Return to Home
-                  </button>
+                  </button> */}
                 </div>
               )}
             </div>
