@@ -46,7 +46,7 @@ export default function HeroHome() {
                     // href="/"
                   >
                     <span className="relative inline-flex items-center">
-                      Registration Opening Soon
+                      Register Now
                       <span className="ml-1 tracking-normal text-black/70 transition-transform group-hover:translate-x-0.5">
                         -&gt;
                       </span>
