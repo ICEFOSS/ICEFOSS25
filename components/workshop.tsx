@@ -17,26 +17,8 @@ const sectionData = {
 const featuresData = [
   {
     id: 1,
-    title: "Intro to Hugging Face: Train, Tune, Deploy",
-    description:
-    "Build and fine-tune cutting-edge transformer models for text classification, sentiment analysis, and chatbots using Hugging Face Transformers.",
-    icon: (
-      <svg
-        className="mb-3 fill-[#01f791]"
-        xmlns="http://www.w3.org/2000/svg"
-        width={24}
-        height={24}
-        viewBox="0 0 24 24"
-        >
-        <path d="M4 4h16v10H5.17L4 15.17V4Zm2 2v6h12V6H6Zm0 12h12v2H6v-2Z" />
-      </svg>
-    ),
-    date: "September 12, 2025",
-    price: 299,
-  },
-  {
-    id: 2,
-    title: "Mastering GenAI & Retrieval Augmented Generation (RAG): From Fundamentals to Real-World Applications",
+    title:
+      "Mastering GenAI & Retrieval Augmented Generation (RAG): From Fundamentals to Real-World Applications",
     description:
       "Learn how Generative AI and Retrieval-Augmented Generation (RAG) power smarter chatbots, knowledge assistants, and enterprise search. Covers concepts, tools, and real-world use cases.",
     icon: (
@@ -55,6 +37,27 @@ const featuresData = [
     ),
     date: "September 11–12, 2025 (Two days)",
     price: 449,
+    image: "/workshops/workshop1.jpg",
+  },
+  {
+    id: 2,
+    title: "Intro to Hugging Face: Train, Tune, Deploy",
+    description:
+      "Build and fine-tune cutting-edge transformer models for text classification, sentiment analysis, and chatbots using Hugging Face Transformers.",
+    icon: (
+      <svg
+        className="mb-3 fill-[#01f791]"
+        xmlns="http://www.w3.org/2000/svg"
+        width={24}
+        height={24}
+        viewBox="0 0 24 24"
+      >
+        <path d="M4 4h16v10H5.17L4 15.17V4Zm2 2v6h12V6H6Zm0 12h12v2H6v-2Z" />
+      </svg>
+    ),
+    date: "September 12, 2025",
+    price: 299,
+    image: "/workshops/workshop2.jpg",
   },
   {
     id: 3,
@@ -74,6 +77,7 @@ const featuresData = [
     ),
     date: "September 12, 2025",
     price: 299,
+    image: "/workshops/workshop3.jpg",
   },
   {
     id: 4,
@@ -93,6 +97,7 @@ const featuresData = [
     ),
     date: "September 12, 2025",
     price: 299,
+    image: "/workshops/workshop4.jpg",
   },
 ];
 
@@ -157,9 +162,15 @@ export default function Workshop() {
           <div className="mx-auto grid max-w-sm gap-12 sm:max-w-none sm:grid-cols-2 md:gap-x-14 md:gap-y-16 lg:grid-cols-3">
             {featuresData.map((feature) => (
               <article key={feature.id}>
-                {feature.icon}
+                {/* {feature.icon} */}
+                <div className="mb-3 ">
+                  <img src={feature.image} alt="" className="rounded" />
+                </div>
                 <h3 className="mb-1 font-nacelle text-[1rem] font-semibold text-gray-200">
-                  <span className="bg-gradient-to-br from-[#FFE000] to-[#01F791] bg-clip-text text-transparent font-light ">Workshop {feature.id}</span> - {feature.title}
+                  <span className="bg-gradient-to-br from-[#FFE000] to-[#01F791] bg-clip-text text-transparent font-semibold ">
+                    Workshop {feature.id}
+                  </span>{" "}
+                  - {feature.title}
                 </h3>
                 <p className="text-indigo-200/65">{feature.description}</p>
                 <p className="mt-3 flex items-center gap-6 text-sm text-indigo-200/70">

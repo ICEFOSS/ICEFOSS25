@@ -10,6 +10,7 @@ import Cta from "@/components/cta";
 import ContactUs from "@/components/contact-us";
 import About from "@/components/about";
 import Workshop from "@/components/workshop";
+import CodeEdge from "@/components/codeedge";
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
       <Hero />
       <About />
       <Workshop />
+      <CodeEdge />
       {/* <Testimonials /> */}
       {/* <Cta /> */}
       <ContactUs />
