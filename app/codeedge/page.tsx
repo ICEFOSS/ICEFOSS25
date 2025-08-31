@@ -31,7 +31,6 @@ type MemberBase = {
   department: string;
   batch: string;
   contactNumber: string;
-  foodPreference: "vegetarian" | "non-vegetarian" | "";
 };
 type Lead = MemberBase & {
   institution: string;
@@ -59,7 +58,6 @@ export default function CompetitionRegistrationPage() {
       batch: "",
       email: "",
       contactNumber: "",
-      foodPreference: "",
     },
     member2: {
       fullName: "",
@@ -67,7 +65,6 @@ export default function CompetitionRegistrationPage() {
       department: "",
       batch: "",
       contactNumber: "",
-      foodPreference: "",
     },
     member3: {
       fullName: "",
@@ -75,7 +72,6 @@ export default function CompetitionRegistrationPage() {
       department: "",
       batch: "",
       contactNumber: "",
-      foodPreference: "",
     },
     paymentScreenshot: null,
   });
@@ -115,7 +111,6 @@ export default function CompetitionRegistrationPage() {
       "batch",
       "email",
       "contactNumber",
-      "foodPreference",
     ];
     for (const k of leadReq) {
       if (!formData.lead[k]) {
@@ -135,7 +130,6 @@ export default function CompetitionRegistrationPage() {
       "department",
       "batch",
       "contactNumber",
-      "foodPreference",
     ];
     for (const k of memberReq) {
       if (!formData.member2[k]) {
@@ -199,7 +193,7 @@ export default function CompetitionRegistrationPage() {
       // Base
       payload.append("workshopName", formData.workshopName);
 
-      // Lead (both prefixed and backward-compatible field names)
+      // Lead (prefixed and backward-compatible field names, excluding foodPreference)
       Object.entries(formData.lead).forEach(([k, v]) => {
         payload.append(`lead_${k}`, String(v));
       });
@@ -210,7 +204,6 @@ export default function CompetitionRegistrationPage() {
       payload.append("batch", formData.lead.batch);
       payload.append("email", formData.lead.email);
       payload.append("contactNumber", formData.lead.contactNumber);
-      payload.append("foodPreference", formData.lead.foodPreference);
 
       // Member 2/3
       Object.entries(formData.member2).forEach(([k, v]) => {
@@ -224,7 +217,6 @@ export default function CompetitionRegistrationPage() {
       if (publicId) payload.append("publicId", publicId);
 
       const response = await fetch(
-        // "https://script.google.com/macros/s/AKfycbzbpQUJbt6KCkdnA1uJHYR0TEDnOh7sg4bZ51ZeshQXgWInIpgswS190HgPehJjN11Zig/exec",
         "https://script.google.com/macros/s/AKfycbzbpQUJbt6KCkdnA1uJHYR0TEDnOh7sg4bZ51ZeshQXgWInIpgswS190HgPehJjN11Zig/exec",
         { method: "POST", body: payload }
       );
@@ -447,48 +439,6 @@ export default function CompetitionRegistrationPage() {
                 />
               </div>
 
-              <div>
-                <span className="mb-1 block text-sm font-medium text-indigo-200/65">
-                  Food Preference <span className="text-red-600">*</span>
-                </span>
-                <div className="space-y-2">
-                  <label className="flex items-center gap-2">
-                    <input
-                      type="radio"
-                      name="lead_food"
-                      value="vegetarian"
-                      className="form-radio text-indigo-500"
-                      checked={formData.lead.foodPreference === "vegetarian"}
-                      onChange={() =>
-                        updateLead("foodPreference", "vegetarian")
-                      }
-                      required
-                    />
-                    <span className="text-sm text-indigo-200/65">
-                      Vegetarian
-                    </span>
-                  </label>
-                  <label className="flex items-center gap-2">
-                    <input
-                      type="radio"
-                      name="lead_food"
-                      value="non-vegetarian"
-                      className="form-radio text-indigo-500"
-                      checked={
-                        formData.lead.foodPreference === "non-vegetarian"
-                      }
-                      onChange={() =>
-                        updateLead("foodPreference", "non-vegetarian")
-                      }
-                      required
-                    />
-                    <span className="text-sm text-indigo-200/65">
-                      Non-Vegetarian
-                    </span>
-                  </label>
-                </div>
-              </div>
-
               <div className="mt-6 flex items-center justify-end gap-4">
                 <button
                   type="submit"
@@ -624,52 +574,6 @@ export default function CompetitionRegistrationPage() {
                   }
                   required
                 />
-              </div>
-
-              <div>
-                <span className="mb-1 block text-sm font-medium text-indigo-200/65">
-                  Food Preference <span className="text-red-600">*</span>
-                </span>
-                <div className="space-y-2">
-                  <label className="flex items-center gap-2">
-                    <input
-                      type="radio"
-                      name="m2_food"
-                      value="vegetarian"
-                      className="form-radio text-indigo-500"
-                      checked={formData.member2.foodPreference === "vegetarian"}
-                      onChange={() =>
-                        updateMember("member2", "foodPreference", "vegetarian")
-                      }
-                      required
-                    />
-                    <span className="text-sm text-indigo-200/65">
-                      Vegetarian
-                    </span>
-                  </label>
-                  <label className="flex items-center gap-2">
-                    <input
-                      type="radio"
-                      name="m2_food"
-                      value="non-vegetarian"
-                      className="form-radio text-indigo-500"
-                      checked={
-                        formData.member2.foodPreference === "non-vegetarian"
-                      }
-                      onChange={() =>
-                        updateMember(
-                          "member2",
-                          "foodPreference",
-                          "non-vegetarian"
-                        )
-                      }
-                      required
-                    />
-                    <span className="text-sm text-indigo-200/65">
-                      Non-Vegetarian
-                    </span>
-                  </label>
-                </div>
               </div>
 
               <div className="mt-6 flex items-center justify-between gap-4">
@@ -814,52 +718,6 @@ export default function CompetitionRegistrationPage() {
                   }
                   required
                 />
-              </div>
-
-              <div>
-                <span className="mb-1 block text-sm font-medium text-indigo-200/65">
-                  Food Preference <span className="text-red-600">*</span>
-                </span>
-                <div className="space-y-2">
-                  <label className="flex items-center gap-2">
-                    <input
-                      type="radio"
-                      name="m3_food"
-                      value="vegetarian"
-                      className="form-radio text-indigo-500"
-                      checked={formData.member3.foodPreference === "vegetarian"}
-                      onChange={() =>
-                        updateMember("member3", "foodPreference", "vegetarian")
-                      }
-                      required
-                    />
-                    <span className="text-sm text-indigo-200/65">
-                      Vegetarian
-                    </span>
-                  </label>
-                  <label className="flex items-center gap-2">
-                    <input
-                      type="radio"
-                      name="m3_food"
-                      value="non-vegetarian"
-                      className="form-radio text-indigo-500"
-                      checked={
-                        formData.member3.foodPreference === "non-vegetarian"
-                      }
-                      onChange={() =>
-                        updateMember(
-                          "member3",
-                          "foodPreference",
-                          "non-vegetarian"
-                        )
-                      }
-                      required
-                    />
-                    <span className="text-sm text-indigo-200/65">
-                      Non-Vegetarian
-                    </span>
-                  </label>
-                </div>
               </div>
 
               <div className="mt-6 flex items-center justify-between gap-4">
