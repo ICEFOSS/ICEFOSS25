@@ -25,68 +25,38 @@ const departments = [
   { value: "ME", label: "Mechanical Engineering – ME" },
 ];
 
-type MemberBase = {
-  fullName: string;
-  semester: string;
-  department: string;
-  batch: string;
-  contactNumber: string;
-};
-type Lead = MemberBase & {
-  institution: string;
-  email: string;
-};
-
 export default function CompetitionRegistrationPage() {
   const [currentStep, setCurrentStep] = useState<Step>("lead");
   const [paymentCompleted, setPaymentCompleted] = useState(false);
   const [paymentProcessing, setPaymentProcessing] = useState(false);
 
-  const [formData, setFormData] = useState<{
-    workshopName: string;
-    lead: Lead;
-    member2: MemberBase;
-    member3: MemberBase;
-    paymentScreenshot: File | null;
-  }>({
+  const [formData, setFormData] = useState({
     workshopName: competition.value,
-    lead: {
-      fullName: "",
-      institution: "",
-      semester: "",
-      department: "",
-      batch: "",
-      email: "",
-      contactNumber: "",
-    },
-    member2: {
-      fullName: "",
-      semester: "",
-      department: "",
-      batch: "",
-      contactNumber: "",
-    },
-    member3: {
-      fullName: "",
-      semester: "",
-      department: "",
-      batch: "",
-      contactNumber: "",
-    },
-    paymentScreenshot: null,
+    leadFullName: "",
+    leadInstitution: "",
+    leadSemester: "",
+    leadDepartment: "",
+    leadBatch: "",
+    leadEmail: "",
+    leadContactNumber: "",
+    member2FullName: "",
+    member2Semester: "",
+    member2Department: "",
+    member2Batch: "",
+    member2ContactNumber: "",
+    member3FullName: "",
+    member3Semester: "",
+    member3Department: "",
+    member3Batch: "",
+    member3ContactNumber: "",
+    paymentScreenshot: null as File | null,
   });
 
-  function updateLead<K extends keyof Lead>(key: K, value: Lead[K]) {
-    setFormData((prev) => ({ ...prev, lead: { ...prev.lead, [key]: value } }));
-  }
-  function updateMember<
-    N extends "member2" | "member3",
-    K extends keyof MemberBase
-  >(member: N, key: K, value: MemberBase[K]) {
-    setFormData((prev) => ({
-      ...prev,
-      [member]: { ...prev[member], [key]: value },
-    }));
+  function handleInputChange(
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
   }
 
   function headerTitle() {
@@ -103,51 +73,32 @@ export default function CompetitionRegistrationPage() {
   }
 
   function validateAll(): boolean {
-    const leadReq: (keyof Lead)[] = [
-      "fullName",
-      "institution",
-      "semester",
-      "department",
-      "batch",
-      "email",
-      "contactNumber",
+    const required: string[] = [
+      // lead
+      "leadFullName",
+      "leadInstitution",
+      "leadSemester",
+      "leadDepartment",
+      "leadBatch",
+      "leadEmail",
+      "leadContactNumber",
+      // member 2
+      "member2FullName",
+      "member2Semester",
+      "member2Department",
+      "member2Batch",
+      "member2ContactNumber",
+      // member 3
+      "member3FullName",
+      "member3Semester",
+      "member3Department",
+      "member3Batch",
+      "member3ContactNumber",
     ];
-    for (const k of leadReq) {
-      if (!formData.lead[k]) {
-        alert(
-          `Please complete Team Lead field: ${String(k).replace(
-            /([A-Z])/g,
-            " $1"
-          )}`
-        );
-        return false;
-      }
-    }
 
-    const memberReq: (keyof MemberBase)[] = [
-      "fullName",
-      "semester",
-      "department",
-      "batch",
-      "contactNumber",
-    ];
-    for (const k of memberReq) {
-      if (!formData.member2[k]) {
-        alert(
-          `Please complete Member 2 field: ${String(k).replace(
-            /([A-Z])/g,
-            " $1"
-          )}`
-        );
-        return false;
-      }
-      if (!formData.member3[k]) {
-        alert(
-          `Please complete Member 3 field: ${String(k).replace(
-            /([A-Z])/g,
-            " $1"
-          )}`
-        );
+    for (const key of required) {
+      if (!formData[key as keyof typeof formData]) {
+        alert(`Please complete field: ${key.replace(/([A-Z])/g, " $1")}`);
         return false;
       }
     }
@@ -189,32 +140,14 @@ export default function CompetitionRegistrationPage() {
       }
 
       const payload = new URLSearchParams();
-
-      // Base
-      payload.append("workshopName", formData.workshopName);
-
-      // Lead (prefixed and backward-compatible field names, excluding foodPreference)
-      Object.entries(formData.lead).forEach(([k, v]) => {
-        payload.append(`lead_${k}`, String(v));
+      Object.entries(formData).forEach(([key, value]) => {
+        if (key === "paymentScreenshot") {
+          if (screenshotUrl) payload.append("screenshotUrl", screenshotUrl);
+          if (publicId) payload.append("publicId", publicId);
+        } else {
+          payload.append(key, String(value));
+        }
       });
-      payload.append("fullName", formData.lead.fullName);
-      payload.append("institution", formData.lead.institution);
-      payload.append("semester", formData.lead.semester);
-      payload.append("department", formData.lead.department);
-      payload.append("batch", formData.lead.batch);
-      payload.append("email", formData.lead.email);
-      payload.append("contactNumber", formData.lead.contactNumber);
-
-      // Member 2/3
-      Object.entries(formData.member2).forEach(([k, v]) => {
-        payload.append(`member2_${k}`, String(v));
-      });
-      Object.entries(formData.member3).forEach(([k, v]) => {
-        payload.append(`member3_${k}`, String(v));
-      });
-
-      if (screenshotUrl) payload.append("screenshotUrl", screenshotUrl);
-      if (publicId) payload.append("publicId", publicId);
 
       const response = await fetch(
         "https://script.google.com/macros/s/AKfycbzbpQUJbt6KCkdnA1uJHYR0TEDnOh7sg4bZ51ZeshQXgWInIpgswS190HgPehJjN11Zig/exec",
@@ -305,11 +238,12 @@ export default function CompetitionRegistrationPage() {
                 </label>
                 <input
                   id="lead_fullName"
+                  name="leadFullName"
                   type="text"
                   className="form-input w-full"
                   placeholder="Team lead full name"
-                  value={formData.lead.fullName}
-                  onChange={(e) => updateLead("fullName", e.target.value)}
+                  value={formData.leadFullName}
+                  onChange={handleInputChange}
                   required
                 />
               </div>
@@ -323,11 +257,12 @@ export default function CompetitionRegistrationPage() {
                 </label>
                 <input
                   id="lead_institution"
+                  name="leadInstitution"
                   type="text"
                   className="form-input w-full"
                   placeholder="Institution"
-                  value={formData.lead.institution}
-                  onChange={(e) => updateLead("institution", e.target.value)}
+                  value={formData.leadInstitution}
+                  onChange={handleInputChange}
                   required
                 />
               </div>
@@ -341,9 +276,10 @@ export default function CompetitionRegistrationPage() {
                 </label>
                 <select
                   id="lead_semester"
+                  name="leadSemester"
                   className="form-input w-full"
-                  value={formData.lead.semester}
-                  onChange={(e) => updateLead("semester", e.target.value)}
+                  value={formData.leadSemester}
+                  onChange={handleInputChange}
                   required
                 >
                   <option value="">Select semester</option>
@@ -363,9 +299,10 @@ export default function CompetitionRegistrationPage() {
                 </label>
                 <select
                   id="lead_department"
+                  name="leadDepartment"
                   className="form-input w-full"
-                  value={formData.lead.department}
-                  onChange={(e) => updateLead("department", e.target.value)}
+                  value={formData.leadDepartment}
+                  onChange={handleInputChange}
                   required
                 >
                   <option value="">Select department</option>
@@ -389,9 +326,10 @@ export default function CompetitionRegistrationPage() {
                 </label>
                 <select
                   id="lead_batch"
+                  name="leadBatch"
                   className="form-input w-full"
-                  value={formData.lead.batch}
-                  onChange={(e) => updateLead("batch", e.target.value)}
+                  value={formData.leadBatch}
+                  onChange={handleInputChange}
                   required
                 >
                   <option value="">Select batch</option>
@@ -411,11 +349,12 @@ export default function CompetitionRegistrationPage() {
                 </label>
                 <input
                   id="lead_email"
+                  name="leadEmail"
                   type="email"
                   className="form-input w-full"
                   placeholder="Team lead email"
-                  value={formData.lead.email}
-                  onChange={(e) => updateLead("email", e.target.value)}
+                  value={formData.leadEmail}
+                  onChange={handleInputChange}
                   required
                 />
               </div>
@@ -429,12 +368,13 @@ export default function CompetitionRegistrationPage() {
                 </label>
                 <input
                   id="lead_contact"
+                  name="leadContactNumber"
                   type="tel"
                   maxLength={10}
                   className="form-input w-full"
                   placeholder="Team lead contact number"
-                  value={formData.lead.contactNumber}
-                  onChange={(e) => updateLead("contactNumber", e.target.value)}
+                  value={formData.leadContactNumber}
+                  onChange={handleInputChange}
                   required
                 />
               </div>
@@ -468,13 +408,12 @@ export default function CompetitionRegistrationPage() {
                 </label>
                 <input
                   id="m2_fullName"
+                  name="member2FullName"
                   type="text"
                   className="form-input w-full"
                   placeholder="Member 2 full name"
-                  value={formData.member2.fullName}
-                  onChange={(e) =>
-                    updateMember("member2", "fullName", e.target.value)
-                  }
+                  value={formData.member2FullName}
+                  onChange={handleInputChange}
                   required
                 />
               </div>
@@ -488,11 +427,10 @@ export default function CompetitionRegistrationPage() {
                 </label>
                 <select
                   id="m2_semester"
+                  name="member2Semester"
                   className="form-input w-full"
-                  value={formData.member2.semester}
-                  onChange={(e) =>
-                    updateMember("member2", "semester", e.target.value)
-                  }
+                  value={formData.member2Semester}
+                  onChange={handleInputChange}
                   required
                 >
                   <option value="">Select semester</option>
@@ -512,11 +450,10 @@ export default function CompetitionRegistrationPage() {
                 </label>
                 <select
                   id="m2_department"
+                  name="member2Department"
                   className="form-input w-full"
-                  value={formData.member2.department}
-                  onChange={(e) =>
-                    updateMember("member2", "department", e.target.value)
-                  }
+                  value={formData.member2Department}
+                  onChange={handleInputChange}
                   required
                 >
                   <option value="">Select department</option>
@@ -540,11 +477,10 @@ export default function CompetitionRegistrationPage() {
                 </label>
                 <select
                   id="m2_batch"
+                  name="member2Batch"
                   className="form-input w-full"
-                  value={formData.member2.batch}
-                  onChange={(e) =>
-                    updateMember("member2", "batch", e.target.value)
-                  }
+                  value={formData.member2Batch}
+                  onChange={handleInputChange}
                   required
                 >
                   <option value="">Select batch</option>
@@ -564,14 +500,13 @@ export default function CompetitionRegistrationPage() {
                 </label>
                 <input
                   id="m2_contact"
+                  name="member2ContactNumber"
                   type="tel"
                   maxLength={10}
                   className="form-input w-full"
                   placeholder="Member 2 contact number"
-                  value={formData.member2.contactNumber}
-                  onChange={(e) =>
-                    updateMember("member2", "contactNumber", e.target.value)
-                  }
+                  value={formData.member2ContactNumber}
+                  onChange={handleInputChange}
                   required
                 />
               </div>
@@ -612,13 +547,12 @@ export default function CompetitionRegistrationPage() {
                 </label>
                 <input
                   id="m3_fullName"
+                  name="member3FullName"
                   type="text"
                   className="form-input w-full"
                   placeholder="Member 3 full name"
-                  value={formData.member3.fullName}
-                  onChange={(e) =>
-                    updateMember("member3", "fullName", e.target.value)
-                  }
+                  value={formData.member3FullName}
+                  onChange={handleInputChange}
                   required
                 />
               </div>
@@ -632,11 +566,10 @@ export default function CompetitionRegistrationPage() {
                 </label>
                 <select
                   id="m3_semester"
+                  name="member3Semester"
                   className="form-input w-full"
-                  value={formData.member3.semester}
-                  onChange={(e) =>
-                    updateMember("member3", "semester", e.target.value)
-                  }
+                  value={formData.member3Semester}
+                  onChange={handleInputChange}
                   required
                 >
                   <option value="">Select semester</option>
@@ -656,11 +589,10 @@ export default function CompetitionRegistrationPage() {
                 </label>
                 <select
                   id="m3_department"
+                  name="member3Department"
                   className="form-input w-full"
-                  value={formData.member3.department}
-                  onChange={(e) =>
-                    updateMember("member3", "department", e.target.value)
-                  }
+                  value={formData.member3Department}
+                  onChange={handleInputChange}
                   required
                 >
                   <option value="">Select department</option>
@@ -684,11 +616,10 @@ export default function CompetitionRegistrationPage() {
                 </label>
                 <select
                   id="m3_batch"
+                  name="member3Batch"
                   className="form-input w-full"
-                  value={formData.member3.batch}
-                  onChange={(e) =>
-                    updateMember("member3", "batch", e.target.value)
-                  }
+                  value={formData.member3Batch}
+                  onChange={handleInputChange}
                   required
                 >
                   <option value="">Select batch</option>
@@ -708,14 +639,13 @@ export default function CompetitionRegistrationPage() {
                 </label>
                 <input
                   id="m3_contact"
+                  name="member3ContactNumber"
                   type="tel"
                   maxLength={10}
                   className="form-input w-full"
                   placeholder="Member 3 contact number"
-                  value={formData.member3.contactNumber}
-                  onChange={(e) =>
-                    updateMember("member3", "contactNumber", e.target.value)
-                  }
+                  value={formData.member3ContactNumber}
+                  onChange={handleInputChange}
                   required
                 />
               </div>
